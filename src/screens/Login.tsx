@@ -8,6 +8,7 @@ import {
 } from "react-native"
 import { TextInput } from "react-native-paper"
 import GoogleLogo from "../assets/google.png"
+import { StatusBar } from "expo-status-bar"
 import React from "react"
 
 type Props = {}
@@ -15,16 +16,8 @@ type Props = {}
 const Login = (props: Props) => {
   return (
     <View style={styles.container}>
-      <Text
-        style={{
-          fontFamily: "sans-serif-condensed",
-          color: "black",
-          fontWeight: "bold",
-          fontSize: 33,
-        }}
-      >
-        Welcome back
-      </Text>
+      <StatusBar backgroundColor="#f7f7f8" style="dark" />
+      <Text style={styles.headerText}>Welcome back</Text>
       <TextInput
         style={styles.input}
         mode="outlined"
@@ -132,6 +125,12 @@ const Login = (props: Props) => {
 export default Login
 
 const styles = StyleSheet.create({
+  headerText: {
+    fontFamily: "sans-serif-condensed",
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 33,
+  },
   container: {
     flex: 1,
     alignItems: "center",

@@ -5,16 +5,19 @@ import {
   Pressable,
   Dimensions,
   Image,
+  SafeAreaView,
 } from "react-native"
 import { TextInput } from "react-native-paper"
 import GoogleLogo from "../assets/google.png"
+import { StatusBar } from "expo-status-bar"
 import React from "react"
 
 type Props = {}
 
 const SignUp = (props: Props) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#f7f7f8" style="dark" />
       <Text
         style={{
           fontFamily: "sans-serif-condensed",
@@ -58,10 +61,27 @@ const SignUp = (props: Props) => {
         keyboardType="visible-password"
         secureTextEntry
       />
+      <View
+        style={{
+          width: "82%",
+          borderWidth: 1.5,
+          borderColor: "silver",
+          marginTop: 15,
+          padding: 15,
+          borderRadius: 4,
+        }}
+      >
+        <Text style={{ fontSize: 15 }}>Your password must contain:</Text>
+        <Text style={{ fontSize: 15, marginTop: 6 }}>
+          {/* <Text style={{ fontSize: 15, marginTop: 6, color: "#28a47c" }}> */}
+          • At least 8 characters
+          {/* ✔︎ At least 8 characters */}
+        </Text>
+      </View>
       <Pressable
         android_ripple={{ color: "white" }}
         style={{
-          marginTop: 20,
+          marginTop: 15,
           backgroundColor: "#28a47c",
           paddingVertical: 15,
           paddingHorizontal: Dimensions.get("screen").width * 0.32,
@@ -139,7 +159,7 @@ const SignUp = (props: Props) => {
           Continue with Google
         </Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -157,6 +177,6 @@ const styles = StyleSheet.create({
   input: {
     width: "82%",
     backgroundColor: "#f7f7f8",
-    marginTop: 15,
+    marginTop: 10,
   },
 })
