@@ -59,7 +59,7 @@ const SignUp = (props: Props) => {
         outlineColor="#28a47c"
         placeholder="Password"
         keyboardType="visible-password"
-        secureTextEntry
+        secureTextEntry={true}
       />
       <View
         style={{
