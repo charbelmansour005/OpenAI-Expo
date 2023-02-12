@@ -70,7 +70,7 @@ const OpenAI = () => {
       <StatusBar translucent={false} backgroundColor="#484454" style="light" />
       {loading && ShowApiBusy()}
       {response && !loading ? (
-        <ScrollView style={{ marginBottom: 70 }}>
+        <ScrollView style={{ marginBottom: 80 }}>
           <Divider />
           <Text selectable style={styles.baseFont}>
             You: {base}
