@@ -9,8 +9,8 @@ export default function App() {
   return (
     <React.Fragment>
       <ToastProvider successColor="#28a47c" normalColor="#383444">
-        {/* <SignUp /> */}
-        <Login />
+        <SignUp />
+        {/* <Login /> */}
         {/* <OpenAI /> */}
       </ToastProvider>
     </React.Fragment>
