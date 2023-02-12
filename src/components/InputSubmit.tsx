@@ -20,6 +20,7 @@ const InputSubmit = ({ ...props }: Props) => {
         position: "absolute",
         bottom: 0,
         backgroundColor: "#383444",
+        padding: 10,
       }}
     >
       <TextInput
