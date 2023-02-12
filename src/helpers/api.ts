@@ -8,6 +8,7 @@ type Constants = {
 };
 
 const firebaseAPIKey = 'AIzaSyCdO4EhlwTBUqEUR1KtsnxTX_B9BsR2X0o';
+const grant_type = 'refresh_token';
 
 export const CONTANTS: Constants = {
   myToken: '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',

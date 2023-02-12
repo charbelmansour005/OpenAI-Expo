@@ -9,3 +9,8 @@ export interface authBody {
   password: string;
   returnSecureToken: boolean;
 }
+
+export interface refreshTokenBody {
+  grant_type: string;
+  refresh_token: string;
+}
