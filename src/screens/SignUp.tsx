@@ -36,7 +36,7 @@ const SignUp = (props: Props) => {
         }}
       >
         Please note that phone verification is required for signup. Your number
-        will only be used to verify your identity for security purposes.
+        might be used to verify your identity for security purposes.
       </Text>
       <TextInput
         style={styles.input}
@@ -46,6 +46,15 @@ const SignUp = (props: Props) => {
         placeholderTextColor="silver"
         outlineColor="#28a47c"
         placeholder="Email address"
+      />
+      <TextInput
+        style={styles.input}
+        mode="outlined"
+        activeOutlineColor="#28a47c"
+        textColor="black"
+        placeholderTextColor="silver"
+        outlineColor="#28a47c"
+        placeholder="Password"
       />
       <Pressable
         android_ripple={{ color: "white" }}
@@ -105,6 +114,29 @@ const SignUp = (props: Props) => {
           style={{ height: 1, backgroundColor: "silver", width: "30%" }}
         ></View>
       </View>
+      <Pressable
+        android_ripple={{ color: "white" }}
+        style={{
+          marginTop: 30,
+          display: "flex",
+          flexDirection: "row",
+          borderWidth: 1.5,
+          borderColor: "silver",
+          borderRadius: 5,
+          paddingVertical: 12,
+          width: "82%",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        <Image
+          source={GoogleLogo}
+          style={{ height: 26, width: 26, marginLeft: 15 }}
+        />
+        <Text style={{ fontSize: 16, marginLeft: 15 }}>
+          Continue with Google
+        </Text>
+      </Pressable>
     </View>
   )
 }
@@ -123,6 +155,6 @@ const styles = StyleSheet.create({
   input: {
     width: "82%",
     backgroundColor: "#f7f7f8",
-    marginTop: 20,
+    marginTop: 15,
   },
 })
