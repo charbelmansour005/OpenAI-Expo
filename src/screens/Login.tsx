@@ -42,6 +42,7 @@ const Login = (props: Props) => {
         placeholderTextColor="silver"
         outlineColor="#28a47c"
         placeholder="Password"
+        secureTextEntry
       />
       <Pressable
         android_ripple={{ color: "white" }}
