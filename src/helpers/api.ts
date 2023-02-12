@@ -4,8 +4,8 @@ type Constants = {
 }
 
 export const CONTANTS: Constants = {
-  myToken: "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",
+  myToken: "sk-",
   URL: "https://api.openai.com/v1/engines/davinci/completions",
 }
-
+// qNhg85gzTyEZYE6651q0T3BlbkFJJ3ViQ6rQ4YBotNrJ7EGM
 // 0FPijJ6lsV2BANZJRiQ6T3BlbkFJghVbr5hhNlfmFb1Q7FvT
