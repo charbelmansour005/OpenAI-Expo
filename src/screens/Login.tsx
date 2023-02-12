@@ -29,9 +29,6 @@ type Props = {};
 
 const Login = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { access_token, email, refresh_token } = useAppSelector(
-    (state) => state.auth
-  );
 
   const { returnSecureToken } = CONTANTS;
 
