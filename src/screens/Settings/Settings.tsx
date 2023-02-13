@@ -14,7 +14,12 @@ const Settings = () => {
 
   return (
     <View>
-      <Button onPress={handleLogout}>Logout</Button>
+      <Button
+        mode="elevated"
+        onPress={handleLogout}
+      >
+        Logout
+      </Button>
     </View>
   );
 };
