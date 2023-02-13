@@ -15,34 +15,32 @@ import React from 'react';
 import { Formik } from 'formik';
 import { useMutation } from '@tanstack/react-query';
 import { singInUser } from '../helpers/auth/authHelpers';
-import {
-  authBody,
-  authErrorResponse,
-  authResponse,
-} from '../interfaces/auth/authInterfaces';
+import { authBody, authErrorResponse } from '../interfaces/auth/authInterfaces';
 import { CONTANTS } from '../helpers/api';
 import { signInValidations } from '../validations/auth/authValidations';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch } from '../redux/hooks';
 import { setUser } from '../redux/auth/authSlice';
+import { StackScreenProps } from '@react-navigation/stack/lib/typescript/src/types';
+import { AuthStackParams } from '../navigation/Public/AuthNavigation';
 
-type Props = {};
+type Props = StackScreenProps<AuthStackParams, 'Login'>;
 
-const Login = (props: Props) => {
+const Login = ({ navigation }: Props) => {
+  const { replace } = navigation;
   const dispatch = useAppDispatch();
 
   const { returnSecureToken } = CONTANTS;
 
   const { isError, error, isLoading, mutate } = useMutation({
     mutationFn: (args: authBody) => singInUser({ ...args }),
-    onSuccess: (response) => {
+    onSuccess: (response) =>
       dispatch(
         setUser({
           email: response.email,
           idToken: response.idToken,
           refreshToken: response.refreshToken,
         })
-      );
-    },
+      ),
   });
 
   return (
@@ -92,7 +90,7 @@ const Login = (props: Props) => {
               placeholder="Email address"
               error={!!errors.email && touched.email}
             />
-            {errors.email && (
+            {errors.email && touched.password && (
               <Text style={{ color: 'tomato' }}>{errors.email}</Text>
             )}
             <TextInput
@@ -109,7 +107,7 @@ const Login = (props: Props) => {
               placeholder="Password"
               secureTextEntry
             />
-            {errors.password && (
+            {errors.password && touched.password && (
               <Text style={{ color: 'tomato' }}>{errors.password}</Text>
             )}
             <Pressable
@@ -147,6 +145,7 @@ const Login = (props: Props) => {
                   textAlign: 'center',
                   marginLeft: 10,
                 }}
+                onPress={() => replace('Signup')}
               >
                 Sign up
               </Text>

@@ -8,6 +8,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
+import AppNavigation from './src/navigation/AppNavigation';
 
 const queryClient = new QueryClient();
 
@@ -19,9 +20,7 @@ export default function App() {
           successColor="#28a47c"
           normalColor="#383444"
         >
-          {/* <SignUp /> */}
-          <Login />
-          {/* <OpenAI /> */}
+          <AppNavigation />
         </ToastProvider>
       </QueryClientProvider>
     </Provider>
