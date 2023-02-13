@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#484454",
   },
-
   button: {
     width: "10%",
     marginVertical: 20,

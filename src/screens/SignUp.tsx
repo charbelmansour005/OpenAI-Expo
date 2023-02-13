@@ -8,28 +8,29 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   Keyboard,
-} from 'react-native';
-import { TextInput } from 'react-native-paper';
-import GoogleLogo from '../assets/google.png';
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { useAppDispatch } from '../redux/hooks';
-import { useMutation } from '@tanstack/react-query/build/lib/useMutation';
-import { singUpUser } from '../helpers/auth/authHelpers';
-import { authBody, authErrorResponse } from '../interfaces/auth/authInterfaces';
-import { setUser } from '../redux/auth/authSlice';
-import { Formik } from 'formik';
-import { CONTANTS } from '../helpers/api';
-import { StackScreenProps } from '@react-navigation/stack/lib/typescript/src/types';
-import { AuthStackParams } from '../navigation/Public/AuthNavigation';
+  ActivityIndicator,
+} from "react-native"
+import { TextInput } from "react-native-paper"
+import GoogleLogo from "../assets/google.png"
+import { StatusBar } from "expo-status-bar"
+import React from "react"
+import { useAppDispatch } from "../redux/hooks"
+import { useMutation } from "@tanstack/react-query/build/lib/useMutation"
+import { singUpUser } from "../helpers/auth/authHelpers"
+import { authBody, authErrorResponse } from "../interfaces/auth/authInterfaces"
+import { setUser } from "../redux/auth/authSlice"
+import { Formik } from "formik"
+import { CONTANTS } from "../helpers/api"
+import { StackScreenProps } from "@react-navigation/stack/lib/typescript/src/types"
+import { AuthStackParams } from "../navigation/Public/AuthNavigation"
 
-type Props = StackScreenProps<AuthStackParams, 'Signup'>;
+type Props = StackScreenProps<AuthStackParams, "Signup">
 
 const SignUp = ({ navigation }: Props) => {
-  const { replace } = navigation;
-  const dispatch = useAppDispatch();
+  const { replace } = navigation
+  const dispatch = useAppDispatch()
 
-  const { returnSecureToken } = CONTANTS;
+  const { returnSecureToken } = CONTANTS
 
   const { isError, error, isLoading, mutate } = useMutation({
     mutationFn: (args: authBody) => singUpUser({ ...args }),
@@ -41,11 +42,11 @@ const SignUp = ({ navigation }: Props) => {
           refreshToken: response.refreshToken,
         })
       ),
-  });
+  })
 
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
+      initialValues={{ email: "", password: "" }}
       onSubmit={(values) =>
         mutate({
           email: values.email,
@@ -65,20 +66,17 @@ const SignUp = ({ navigation }: Props) => {
       }) => (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <SafeAreaView style={styles.container}>
-            <StatusBar
-              backgroundColor="#f7f7f8"
-              style="dark"
-            />
+            <StatusBar backgroundColor="#f7f7f8" style="dark" />
             {isError && (
-              <Text style={{ color: 'tomato' }}>
+              <Text style={{ color: "tomato" }}>
                 {(error as authErrorResponse).response.data.error.message}
               </Text>
             )}
             <Text
               style={{
-                fontFamily: 'sans-serif-condensed',
-                color: 'black',
-                fontWeight: 'bold',
+                fontFamily: "sans-serif-condensed",
+                color: "black",
+                fontWeight: "bold",
                 fontSize: 33,
               }}
             >
@@ -86,11 +84,11 @@ const SignUp = ({ navigation }: Props) => {
             </Text>
             <Text
               style={{
-                fontFamily: 'sans-serif-condensed',
-                color: 'black',
+                fontFamily: "sans-serif-condensed",
+                color: "black",
                 fontSize: 16,
                 marginTop: 10,
-                textAlign: 'center',
+                textAlign: "center",
                 paddingHorizontal: 35,
               }}
             >
@@ -100,8 +98,8 @@ const SignUp = ({ navigation }: Props) => {
             </Text>
             <TextInput
               value={values.email}
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
               style={styles.input}
               mode="outlined"
               activeOutlineColor="#28a47c"
@@ -112,12 +110,12 @@ const SignUp = ({ navigation }: Props) => {
               error={!!errors.email && touched.email}
             />
             {errors.email && touched.email && (
-              <Text style={{ color: 'tomato' }}>{errors.email}</Text>
+              <Text style={{ color: "tomato" }}>{errors.email}</Text>
             )}
             <TextInput
               value={values.password}
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
               style={styles.input}
               mode="outlined"
               activeOutlineColor="#28a47c"
@@ -130,111 +128,131 @@ const SignUp = ({ navigation }: Props) => {
               error={!!errors.password && touched.password}
             />
             {errors.password && touched.password && (
-              <Text style={{ color: 'tomato' }}>{errors.email}</Text>
+              <Text style={{ color: "tomato" }}>{errors.email}</Text>
             )}
-            <View
-              style={{
-                width: '82%',
-                borderWidth: 1.5,
-                borderColor: 'silver',
-                marginTop: 15,
-                padding: 15,
-                borderRadius: 4,
-              }}
-            >
-              <Text style={{ fontSize: 15 }}>Your password must contain:</Text>
-              <Text
+            {values.password && (
+              <View
                 style={{
-                  fontSize: 15,
-                  marginTop: 6,
-                  color: values.password.length < 8 ? 'tomato' : 'green',
+                  width: "82%",
+                  borderWidth: 1.5,
+                  borderColor: "silver",
+                  marginTop: 15,
+                  padding: 15,
+                  borderRadius: 4,
                 }}
               >
-                {/* <Text style={{ fontSize: 15, marginTop: 6, color: "#28a47c" }}> */}
-                {values.password.length < 8
-                  ? '* At least 8 characters long'
-                  : '✔︎ At least 8 characters'}
-                {/* ✔︎ At least 8 characters */}
-              </Text>
-            </View>
+                <Text style={{ fontSize: 15 }}>
+                  Your password must contain:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    marginTop: 6,
+                    color: values.password.length < 8 ? "tomato" : "green",
+                  }}
+                >
+                  {/* <Text style={{ fontSize: 15, marginTop: 6, color: "#28a47c" }}> */}
+                  {values.password.length < 8
+                    ? "* At least 8 characters long"
+                    : "✔︎ At least 8 characters"}
+                  {/* ✔︎ At least 8 characters */}
+                </Text>
+              </View>
+            )}
             <Pressable
-              android_ripple={{ color: 'white' }}
+              android_ripple={{ color: "white" }}
               style={{
-                marginTop: 15,
-                backgroundColor: '#28a47c',
+                marginTop: 20,
+                backgroundColor: "#28a47c",
                 paddingVertical: 15,
-                paddingHorizontal: Dimensions.get('screen').width * 0.32,
+                width: "82%",
                 borderRadius: 3,
               }}
               disabled={!isValid || isLoading}
               onPress={() => handleSubmit()}
             >
-              <Text style={{ color: 'white', fontSize: 16 }}>Continue</Text>
+              <Text
+                style={{ color: "white", fontSize: 16, textAlign: "center" }}
+              >
+                {isLoading ? (
+                  <ActivityIndicator size="small" color="white" />
+                ) : (
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 16,
+                      textAlign: "center",
+                    }}
+                  >
+                    Continue
+                  </Text>
+                )}
+              </Text>
             </Pressable>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <View style={{ display: "flex", flexDirection: "row" }}>
               <Text
                 style={{
-                  fontFamily: 'sans-serif-condensed',
-                  color: 'black',
+                  fontFamily: "sans-serif-condensed",
+                  color: "black",
                   fontSize: 16,
                   marginTop: 15,
-                  textAlign: 'center',
+                  textAlign: "center",
                 }}
               >
                 Already have an account?
               </Text>
               <Text
                 style={{
-                  fontFamily: 'sans-serif-condensed',
-                  color: '#28a47c',
+                  fontFamily: "sans-serif-condensed",
+                  color: "#28a47c",
                   fontSize: 16,
                   marginTop: 15,
-                  textAlign: 'center',
+                  textAlign: "center",
                   marginLeft: 10,
                 }}
-                onPress={() => replace('Login')}
+                onPress={() => replace("Login")}
               >
                 Log in
               </Text>
             </View>
             <View
               style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
                 marginTop: 30,
               }}
             >
               <View
-                style={{ height: 1, backgroundColor: 'silver', width: '30%' }}
+                style={{ height: 1, backgroundColor: "silver", width: "30%" }}
               ></View>
               <Text
                 style={{
                   marginHorizontal: 10,
-                  fontWeight: 'bold',
-                  color: 'gray',
+                  fontWeight: "bold",
+                  color: "gray",
                 }}
               >
                 OR
               </Text>
               <View
-                style={{ height: 1, backgroundColor: 'silver', width: '30%' }}
+                style={{ height: 1, backgroundColor: "silver", width: "30%" }}
               ></View>
             </View>
             <Pressable
-              android_ripple={{ color: 'white' }}
+              android_ripple={{ color: "white" }}
               style={{
                 marginTop: 30,
-                display: 'flex',
-                flexDirection: 'row',
+                display: "flex",
+                flexDirection: "row",
                 borderWidth: 1.5,
-                borderColor: 'silver',
+                borderColor: "silver",
                 borderRadius: 5,
                 paddingVertical: 12,
-                width: '82%',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
+                width: "82%",
+                justifyContent: "flex-start",
+                alignItems: "center",
               }}
             >
               <Image
@@ -249,23 +267,23 @@ const SignUp = ({ navigation }: Props) => {
         </TouchableWithoutFeedback>
       )}
     </Formik>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f7f7f8',
-    width: '100%',
-    height: '100%',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#f7f7f8",
+    width: "100%",
+    height: "100%",
   },
   input: {
-    width: '82%',
-    backgroundColor: '#f7f7f8',
+    width: "82%",
+    backgroundColor: "#f7f7f8",
     marginTop: 10,
   },
-});
+})
