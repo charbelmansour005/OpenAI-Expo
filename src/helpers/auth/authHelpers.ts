@@ -26,5 +26,6 @@ export const refreshTokens = async (body: refreshTokenBody) => {
   const { exchangeTokenURL } = CONTANTS;
   const response = await axios.post(exchangeTokenURL, body);
 
-  return response;
+  const data: authResponse = response.data;
+  return data;
 };
